@@ -1,0 +1,77 @@
+{
+  "hero": {
+    "badge": "Income Tax e-filing simplified · AY 2026-27",
+    "title": "File Your ITR with",
+    "subtitle": "Automated document upload, draft PDF generation, expert review & end-to-end digital KYC workflow for all ITR forms.",
+    "cta_start": "Start Filing Now",
+    "cta_pricing": "View Pricing"
+  },
+  "calculator": {
+    "title": "ITRGenie Tax Calculator",
+    "subtitle": "AY 2026–27 · FY 2025–26 · Real-time comparison",
+    "quick": "Quick Calculate",
+    "detailed": "Detailed Breakdown",
+    "age_label": "Age group",
+    "age_below60": "Below 60 yrs",
+    "age_senior": "Senior (60–80)",
+    "age_super": "Super Senior (80+)",
+    "gross_income": "Gross total income",
+    "deductions": "Chapter VI-A Deductions",
+    "deductions_hint": "(80C, 80D, HRA, Home Loan, etc.)",
+    "old_regime": "Old regime tax",
+    "new_regime": "New regime tax",
+    "best_for_you": "Best for you",
+    "particulars": "Particulars",
+    "gross": "Gross income",
+    "std_deduction": "Standard deduction",
+    "total_deductions": "Total deductions",
+    "taxable": "Taxable income",
+    "tax_payable": "Tax payable",
+    "you_save": "You save with",
+    "disclaimer": "Real-time calculation · Includes 4% cess & surcharge · Estimates only"
+  },
+  "pricing": {
+    "eyebrow": "Pricing that grows with you",
+    "title": "Choose the plan that fits your needs",
+    "subtitle": "From self-filing to expert-assisted – for every income profile",
+    "buy_now": "Buy now →",
+    "contact_sales": "Contact Sales →",
+    "confused_title": "Confused about the right plan?",
+    "confused_sub": "Share your income sources & get a personalised recommendation.",
+    "talk_expert": "Talk to expert →"
+  },
+  "live": {
+    "badge": "LIVE SESSION",
+    "title": "Live with an Expert",
+    "subtitle": "Connect with a tax expert on Google Meet or Zoom. Complete your ITR in one sitting.",
+    "point1": "Google Meet or Zoom session",
+    "point2": "Expert files while you watch",
+    "point3": "Same-day completion",
+    "cta": "🎥 Book Live ITR Session →"
+  },
+  "how": {
+    "title": "How ITRGenie Works",
+    "step1": "1. Signup",
+    "step2": "2. Complete KYC",
+    "step3": "3. Fill ITR Form",
+    "step4": "4. Payment & File"
+  },
+  "nav": {
+    "login": "Login",
+    "get_started": "Get Started",
+    "logout": "Logout",
+    "pricing": "Pricing",
+    "how_it_works": "How it works",
+    "dashboard": "Dashboard",
+    "lang_btn": "🇮🇳 हिन्दी"
+  },
+  "bot": {
+    "placeholder_name": "Type your name...",
+    "placeholder_pan": "Enter PAN (e.g., ABCDE1234F)",
+    "placeholder_phone": "Enter 10-digit WhatsApp number",
+    "placeholder_email": "Enter email address",
+    "start_filing": "Start filing now →",
+    "team_contact": "Our team will call you shortly! 🎉",
+    "consent": "We'll connect you with a tax expert — takes 30 seconds."
+  }
+}

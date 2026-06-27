@@ -1,0 +1,189 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gray-50;
+  }
+}
+
+@layer components {
+  .card-hover {
+    @apply transition-all duration-200 hover:-translate-y-1 hover:shadow-xl;
+  }
+}
+/* ============================================
+   TAX SUMMARY POPUP STYLES
+   ============================================ */
+
+/* Tax Summary Container - for hover popup */
+.tax-summary-container {
+  position: relative;
+  cursor: pointer;
+}
+
+.tax-popup {
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.tax-summary-container:hover .tax-popup {
+  pointer-events: auto;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Popup animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tax-popup {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+/* Number input styling */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  opacity: 0.5;
+}
+
+input[type="number"]:focus::-webkit-inner-spin-button,
+input[type="number"]:focus::-webkit-outer-spin-button {
+  opacity: 1;
+}
+
+/* Custom scrollbar for popup */
+.tax-popup ::-webkit-scrollbar {
+  width: 4px;
+}
+
+.tax-popup ::-webkit-scrollbar-track {
+  background: #1f2937;
+  border-radius: 10px;
+}
+
+.tax-popup ::-webkit-scrollbar-thumb {
+  background: #4f46e5;
+  border-radius: 10px;
+}
+
+/* Floating animations for background elements */
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 3s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
+}
+
+/* Glass morphism effects */
+.backdrop-blur-sm {
+  backdrop-filter: blur(8px);
+}
+
+/* Hover scale effect */
+.group:hover .scale-105 {
+  transform: scale(1.05);
+}
+
+/* Transition utilities */
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.duration-300 {
+  transition-duration: 300ms;
+}
+/* Tax Summary Popup Styles */
+.tax-summary-container {
+  position: relative;
+  cursor: pointer;
+}
+
+.tax-popup {
+  pointer-events: none;
+  transition: all 0.3s ease;
+  max-width: 90vw;
+  width: 380px;
+  right: 0;
+  left: auto;
+}
+
+@media (max-width: 1200px) {
+  .tax-popup { right: -20px; }
+}
+
+@media (max-width: 768px) {
+  .tax-popup { width: 320px; right: -40px; }
+}
+
+.tax-summary-container:hover .tax-popup {
+  pointer-events: auto;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.tax-popup { animation: fadeInUp 0.3s ease-out; }
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  opacity: 0.5;
+}
+
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.animate-bounce-slow { animation: bounce-slow 3s ease-in-out infinite; }
+.animate-pulse-slow { animation: pulse-slow 4s ease-in-out infinite; }
+/* Genie Bot Animation */
+@keyframes bounce-in {
+  0% { opacity: 0; transform: scale(0.3); }
+  50% { opacity: 1; transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.animate-bounce-in {
+  animation: bounce-in 0.5s ease-out;
+}
+
+/* Genie floating effect */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.fixed .group:hover .w-16 {
+  animation: float 2s ease-in-out infinite;
+}

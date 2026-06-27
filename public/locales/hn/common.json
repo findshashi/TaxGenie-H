@@ -1,0 +1,77 @@
+{
+  "hero": {
+    "badge": "आयकर ई-फाइलिंग आसान · AY 2026-27",
+    "title": "ITRGenie के साथ ITR दाखिल करें",
+    "subtitle": "स्वचालित दस्तावेज़ अपलोड, ड्राफ्ट PDF, विशेषज्ञ समीक्षा और सभी ITR फॉर्म के लिए डिजिटल KYC।",
+    "cta_start": "अभी फाइल करें",
+    "cta_pricing": "मूल्य देखें"
+  },
+  "calculator": {
+    "title": "ITRGenie टैक्स कैलकुलेटर",
+    "subtitle": "AY 2026–27 · FY 2025–26 · रीयल-टाइम तुलना",
+    "quick": "त्वरित गणना",
+    "detailed": "विस्तृत विवरण",
+    "age_label": "आयु वर्ग",
+    "age_below60": "60 वर्ष से कम",
+    "age_senior": "वरिष्ठ (60–80)",
+    "age_super": "अति वरिष्ठ (80+)",
+    "gross_income": "कुल सकल आय",
+    "deductions": "अध्याय VI-A कटौती",
+    "deductions_hint": "(80C, 80D, HRA, गृह ऋण, आदि)",
+    "old_regime": "पुरानी व्यवस्था कर",
+    "new_regime": "नई व्यवस्था कर",
+    "best_for_you": "आपके लिए सर्वोत्तम",
+    "particulars": "विवरण",
+    "gross": "सकल आय",
+    "std_deduction": "मानक कटौती",
+    "total_deductions": "कुल कटौती",
+    "taxable": "कर योग्य आय",
+    "tax_payable": "देय कर",
+    "you_save": "आप बचाते हैं",
+    "disclaimer": "रीयल-टाइम गणना · 4% उपकर एवं अधिभार सहित · केवल अनुमान"
+  },
+  "pricing": {
+    "eyebrow": "आपकी जरूरत के अनुसार मूल्य",
+    "title": "अपनी जरूरत का प्लान चुनें",
+    "subtitle": "स्वयं फाइलिंग से लेकर विशेषज्ञ सहायता तक",
+    "buy_now": "अभी खरीदें →",
+    "contact_sales": "बिक्री से संपर्क करें →",
+    "confused_title": "सही प्लान को लेकर उलझन में हैं?",
+    "confused_sub": "अपनी आय के स्रोत साझा करें और व्यक्तिगत सुझाव पाएं।",
+    "talk_expert": "विशेषज्ञ से बात करें →"
+  },
+  "live": {
+    "badge": "लाइव सत्र",
+    "title": "विशेषज्ञ के साथ लाइव",
+    "subtitle": "Google Meet या Zoom पर टैक्स विशेषज्ञ से जुड़ें। एक ही बैठक में ITR पूरी करें।",
+    "point1": "Google Meet या Zoom सत्र",
+    "point2": "विशेषज्ञ आपके सामने फाइल करेंगे",
+    "point3": "उसी दिन पूर्ण",
+    "cta": "🎥 लाइव ITR सत्र बुक करें →"
+  },
+  "how": {
+    "title": "ITRGenie कैसे काम करता है",
+    "step1": "1. साइनअप",
+    "step2": "2. KYC पूरी करें",
+    "step3": "3. ITR फॉर्म भरें",
+    "step4": "4. भुगतान और फाइल"
+  },
+  "nav": {
+    "login": "लॉगिन",
+    "get_started": "शुरू करें",
+    "logout": "लॉगआउट",
+    "pricing": "मूल्य",
+    "how_it_works": "यह कैसे काम करता है",
+    "dashboard": "डैशबोर्ड",
+    "lang_btn": "🇬🇧 English"
+  },
+  "bot": {
+    "placeholder_name": "अपना नाम टाइप करें...",
+    "placeholder_pan": "PAN दर्ज करें (जैसे ABCDE1234F)",
+    "placeholder_phone": "10 अंकों का WhatsApp नंबर",
+    "placeholder_email": "ईमेल पता दर्ज करें",
+    "start_filing": "अभी फाइल करें →",
+    "team_contact": "हमारी टीम जल्द संपर्क करेगी! 🎉",
+    "consent": "हम आपको एक विशेषज्ञ से जोड़ेंगे — केवल 30 सेकंड।"
+  }
+}
