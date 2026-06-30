@@ -2,8 +2,9 @@
 
 import Link from 'next/link'
 import Head from 'next/head'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabaseClient'
+import Chatbot from './Chatbot'
 
 export default function Layout({ children }) {
   const [user, setUser] = useState(null)
@@ -12,17 +13,6 @@ export default function Layout({ children }) {
   const [isTaxToolsOpen, setIsTaxToolsOpen] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [currentLang, setCurrentLang] = useState('en')
-
-  // Chat Bot State
-  const [showBot, setShowBot] = useState(true)
-  const [isChatOpen, setIsChatOpen] = useState(false)
-  const [messages, setMessages] = useState([
-    { type: 'bot', text: "Hello! 👋 I'm ITRGenie, your tax assistant. What's your name?" }
-  ])
-  const [inputValue, setInputValue] = useState('')
-  const [step, setStep] = useState(0) // 0: name, 1: pan, 2: mobile, 3: email, 4: done
-  const [leadData, setLeadData] = useState({ name: '', pan: '', mobile: '', email: '' })
-  const chatEndRef = useRef(null)
 
   useEffect(() => {
     // Load saved language preference
@@ -37,10 +27,6 @@ export default function Layout({ children }) {
     })
     return () => subscription.unsubscribe()
   }, [])
-
-  useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [messages])
 
   const handleLogout = async () => {
     await supabase.auth.signOut()
@@ -64,81 +50,6 @@ export default function Layout({ children }) {
     document.addEventListener('click', handleClickOutside)
     return () => document.removeEventListener('click', handleClickOutside)
   }, [isProductsOpen, isResourcesOpen, isTaxToolsOpen])
-
-  const handleSendMessage = async () => {
-    if (!inputValue.trim()) return
-
-    // Add user message
-    setMessages(prev => [...prev, { type: 'user', text: inputValue }])
-
-    let newStep = step
-
-    if (step === 0) {
-      // Collect name
-      setLeadData(prev => ({ ...prev, name: inputValue }))
-      newStep = 1
-      setMessages(prev => [...prev, {
-        type: 'bot',
-        text: `Nice to meet you, ${inputValue}! 😊 Please share your PAN number (e.g., ABCDE1234F).`
-      }])
-
-    } else if (step === 1) {
-      // Collect PAN
-      setLeadData(prev => ({ ...prev, pan: inputValue.toUpperCase() }))
-      newStep = 2
-      setMessages(prev => [...prev, {
-        type: 'bot',
-        text: "Got it! Now please share your 10-digit WhatsApp number."
-      }])
-
-    } else if (step === 2) {
-      // Collect mobile
-      setLeadData(prev => ({ ...prev, mobile: inputValue.replace(/\D/g, '') }))
-      newStep = 3
-      setMessages(prev => [...prev, {
-        type: 'bot',
-        text: "Almost done! Finally, please provide your email address."
-      }])
-
-    } else if (step === 3) {
-      // Collect email and save lead to Supabase
-      const finalData = { ...leadData, email: inputValue }
-      setLeadData(finalData)
-      newStep = 4
-
-      // Save lead to Supabase leads table
-      const { error } = await supabase.from('leads').insert({
-        name: finalData.name,
-        phone: finalData.mobile,
-        email: finalData.email,
-        pan: finalData.pan,
-        source: 'landing_bot',
-        bot_responses: finalData,
-        status: 'new',
-      })
-
-      if (error) {
-        console.error('Lead save error:', error)
-      } else {
-        console.log('Lead saved successfully to Supabase')
-      }
-
-      setMessages(prev => [...prev, {
-        type: 'bot',
-        text: `Thank you, ${finalData.name}! 🎉 Our tax expert will contact you on ${finalData.mobile} shortly. Would you like to start filing now?`
-      }])
-
-    } else {
-      // step 4+ — generic response
-      setMessages(prev => [...prev, {
-        type: 'bot',
-        text: "You can start filing by clicking 'Get Started' above. Need anything else?"
-      }])
-    }
-
-    setStep(newStep)
-    setInputValue('')
-  }
 
   // SVG for GenieBot Face
   const GenieBotFace = ({ className = "w-8 h-8" }) => (
@@ -352,110 +263,8 @@ export default function Layout({ children }) {
 
       <main className="min-h-screen">{children}</main>
 
-      {/* ── Chat Bot – with Close (×) and Minimize (–) ── */}
-      {showBot && (
-        <div className="fixed bottom-6 right-6 z-50">
-          <div className="relative">
-            {!isChatOpen ? (
-              <div onClick={() => setIsChatOpen(true)} className="group cursor-pointer">
-                <div className="w-16 h-16 rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform animate-bounce-in bg-gradient-to-br from-indigo-500 to-purple-600">
-                  <GenieBotFace className="w-12 h-12" />
-                </div>
-                <div className="text-center text-xs font-semibold text-indigo-600 mt-1">ITRGenie</div>
-              </div>
-            ) : (
-              <div className="bg-white rounded-2xl shadow-2xl w-96 max-w-[90vw] border border-indigo-100 animate-fadeInUp flex flex-col" style={{ height: '500px' }}>
-
-                {/* Header – with Close (×) and Minimize (–) */}
-                <div className="flex justify-between items-center p-4 border-b bg-gradient-to-r from-indigo-600 to-purple-600 rounded-t-2xl">
-                  <div className="flex items-center gap-2">
-                    <GenieBotFace className="w-8 h-8" />
-                    <div>
-                      <span className="font-bold text-white block text-sm">ITRGenie Assistant</span>
-                      <span className="text-xs text-green-300">● Online</span>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    {/* Minimize button – closes chat window but keeps bot visible */}
-                    <button
-                      onClick={() => setIsChatOpen(false)}
-                      className="text-white/80 hover:text-white hover:bg-white/20 p-1 rounded transition"
-                      title="Minimize"
-                    >
-                      <i className="fas fa-minus text-sm"></i>
-                    </button>
-                    {/* Close button – completely hides the bot */}
-                    <button
-                      onClick={() => {
-                        setIsChatOpen(false)
-                        setShowBot(false)
-                      }}
-                      className="text-white/80 hover:text-white hover:bg-white/20 p-1 rounded transition"
-                      title="Close"
-                    >
-                      <i className="fas fa-times text-sm"></i>
-                    </button>
-                  </div>
-                </div>
-
-                {/* Chat messages */}
-                <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50">
-                  {messages.map((msg, idx) => (
-                    <div key={idx} className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}>
-                      {msg.type === 'bot' && <GenieBotFace className="w-6 h-6 mr-2 flex-shrink-0 mt-1" />}
-                      <div className={`max-w-[80%] p-3 rounded-xl text-sm ${msg.type === 'user'
-                        ? 'bg-indigo-600 text-white rounded-br-none'
-                        : 'bg-white border border-gray-200 text-gray-700 rounded-bl-none shadow-sm'}`}>
-                        {msg.text}
-                      </div>
-                    </div>
-                  ))}
-                  <div ref={chatEndRef} />
-                </div>
-
-                {/* Input area */}
-                {step < 4 ? (
-                  <div className="p-4 border-t bg-white rounded-b-2xl">
-                    <div className="flex gap-2">
-                      <input
-                        type={step === 3 ? 'email' : step === 2 ? 'tel' : 'text'}
-                        value={inputValue}
-                        onChange={(e) => setInputValue(e.target.value)}
-                        onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                        placeholder={t.botPlaceholder[step] || 'Type here...'}
-                        className="flex-1 px-3 py-2 border rounded-lg text-sm focus:outline-none focus:border-indigo-500"
-                      />
-                      <button
-                        onClick={handleSendMessage}
-                        disabled={!inputValue.trim()}
-                        className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition"
-                      >
-                        <i className="fas fa-arrow-right"></i>
-                      </button>
-                    </div>
-                    {step === 0 && (
-                      <p className="text-xs text-gray-400 mt-2">
-                        {currentLang === 'hi'
-                          ? 'हम आपको एक विशेषज्ञ से जोड़ेंगे।'
-                          : "We'll connect you with a tax expert — takes 30 seconds."}
-                      </p>
-                    )}
-                  </div>
-                ) : (
-                  <div className="p-4 border-t bg-white rounded-b-2xl text-center">
-                    <p className="text-sm text-gray-500 mb-2">
-                      {currentLang === 'hi' ? 'हमारी टीम जल्द संपर्क करेगी! 🎉' : 'Our team will call you shortly! 🎉'}
-                    </p>
-                    <Link href="/get-started" className="text-indigo-600 font-medium text-sm hover:underline">
-                      {t.startFiling}
-                    </Link>
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-        </div>
-      )}
+      {/* Chatbot — single source of truth, handles its own open/minimize/close state and Supabase lead capture */}
+      <Chatbot />
 
       {/* Footer */}
       <footer className="bg-gray-900 text-white pt-12 pb-8 mt-16">
